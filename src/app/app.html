@@ -1,0 +1,30 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<header>
+  <h1>Where should I live??</h1>
+</header>
+<div class="content">
+  <div>
+    <h2>Please enter a list of places you like to go and visit in your life</h2>
+    <div *ngFor="let location of locations; index as i">
+      <input type="text" [(ngModel)]="location.id" name="location">
+      <input type="number" [(ngModel)]="location.visit_count" name="Visits per week">
+      <a (click)="removeLocation(location.id)">Remove</a>
+    </div>
+    <a (click)="appendLocation()">Add Location</a>
+    <button (click)="onSubmit()">Where should I live?</button>
+  </div>
+  <div>
+    <google-map
+      #gMap
+      (mapClick)="addMarker($event)"
+    >
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.getPosition()"
+        [options]="markerOptions"></map-marker>
+    </google-map>
+  </div>
+</div>
+<footer>
+  <p>With love from James Bayly</p>
+</footer>
